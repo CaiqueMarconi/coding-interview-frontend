@@ -1,0 +1,298 @@
+import 'package:coding_interview_frontend/app/core/theme/theme_manager/theme_manager.dart';
+import 'package:coding_interview_frontend/app/exchange/domain/entities/currency_entity.dart';
+import 'package:coding_interview_frontend/app/exchange/presentation/controllers/exchange_controller.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_triple/flutter_triple.dart';
+import 'package:lottie/lottie.dart';
+
+class CurrencyExchangeSelector extends StatefulWidget {
+  final ExchangeController exchangeController;
+  const CurrencyExchangeSelector({super.key, required this.exchangeController});
+
+  @override
+  State<CurrencyExchangeSelector> createState() =>
+      _CurrencyExchangeSelectorState();
+}
+
+class _CurrencyExchangeSelectorState extends State<CurrencyExchangeSelector>
+    with SingleTickerProviderStateMixin {
+  late final AnimationController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(vsync: this);
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  void _playAnimation() {
+    _controller.reset();
+    _controller.forward();
+  }
+
+  void openSelectorCurrency({
+    required BuildContext context,
+    required bool isFrom,
+  }) {
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: Colors.transparent,
+      isScrollControlled: true,
+      builder:
+          (_) => CurrencyBottomSheet(
+            selected: widget.exchangeController.selectedCurrency,
+            items: widget.exchangeController.getListCurrencies(),
+            isFrom: isFrom,
+            onSelect:
+                (v) =>
+                    widget.exchangeController.onUpdateCurrencyParam(isFrom, v),
+          ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    return ScopedBuilder(
+      store: widget.exchangeController.exchangeStore,
+      onState: (context, state) {
+        return SizedBox(
+          height: size.height * 0.074,
+          child: Stack(
+            alignment: Alignment.center,
+            children: [
+              Container(
+                height: size.height * 0.054,
+
+                decoration: BoxDecoration(
+                  color: ThemeManager.white,
+                  borderRadius: BorderRadius.circular(40),
+                  border: Border.all(
+                    color: ThemeManager.primaryColor,
+                    width: 2,
+                  ),
+                ),
+              ),
+
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: size.width * 0.04),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Expanded(
+                      child: InkWell(
+                        onTap: () {
+                          widget.exchangeController.onSelectCurrency(
+                            widget.exchangeController.fromCurrency,
+                          );
+                          openSelectorCurrency(context: context, isFrom: true);
+                        },
+                        child: Row(
+                          children: [
+                            Image.asset(
+                              widget.exchangeController.fromCurrency.iconPath ??
+                                  '',
+                              scale: 3.6,
+                            ),
+                            const SizedBox(width: 6),
+                            Text(
+                              widget.exchangeController.fromCurrency.symbol,
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: ThemeManager.greyText,
+                                fontSize: size.width * 0.036,
+                              ),
+                            ),
+                            Icon(
+                              Icons.expand_more,
+                              color: ThemeManager.greyText,
+                              size: size.width * 0.07,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    InkWell(
+                      onTap: () {
+                        _playAnimation();
+                        widget.exchangeController.invert();
+                      },
+                      child: Lottie.asset(
+                        'assets/lotties/swap_button.json',
+                        controller: _controller,
+                        onLoaded: (composition) {
+                          _controller.duration = composition.duration ~/ 4;
+                        },
+                      ),
+                    ),
+                    Expanded(
+                      child: InkWell(
+                        onTap: () {
+                          widget.exchangeController.onSelectCurrency(
+                            widget.exchangeController.toCurrency,
+                          );
+                          openSelectorCurrency(context: context, isFrom: false);
+                        },
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Image.asset(
+                              widget.exchangeController.toCurrency.iconPath ??
+                                  '',
+                              scale: 3.6,
+                            ),
+                            const SizedBox(width: 6),
+                            Text(
+                              widget.exchangeController.toCurrency.symbol,
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: ThemeManager.greyText,
+                                fontSize: size.width * 0.036,
+                              ),
+                            ),
+                            Icon(
+                              Icons.expand_more,
+                              color: ThemeManager.greyText,
+                              size: size.width * 0.07,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+
+              SizedBox(
+                height: size.height * 1,
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: size.width * 0.06),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Container(
+                        color: ThemeManager.white,
+                        padding: EdgeInsets.symmetric(
+                          horizontal: size.width * 0.01,
+                        ),
+                        child: Text(
+                          'TENGO',
+                          style: TextStyle(
+                            fontSize: size.width * 0.0263,
+                            color: ThemeManager.greyText,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                      Container(
+                        color: ThemeManager.white,
+                        padding: EdgeInsets.symmetric(
+                          horizontal: size.width * 0.01,
+                        ),
+                        child: Text(
+                          'QUIERO',
+                          style: TextStyle(
+                            fontSize: size.width * 0.0263,
+                            color: ThemeManager.greyText,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+}
+
+class CurrencyBottomSheet extends StatelessWidget {
+  final List<CurrencyEntity> items;
+  final CurrencyEntity? selected;
+  final bool isFrom;
+  final void Function(CurrencyEntity) onSelect;
+
+  const CurrencyBottomSheet({
+    super.key,
+    this.selected,
+    required this.items,
+    required this.isFrom,
+    required this.onSelect,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    return Container(
+      height: size.height * 0.7,
+      decoration: const BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+      ),
+      padding: const EdgeInsets.only(top: 12),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Container(
+            height: 4,
+            width: 48,
+            margin: const EdgeInsets.only(bottom: 16),
+            decoration: BoxDecoration(
+              color: Colors.grey.shade300,
+              borderRadius: BorderRadius.circular(8),
+            ),
+          ),
+          const Text(
+            'FIAT',
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+          ),
+          const SizedBox(height: 12),
+          Flexible(
+            child: ListView.builder(
+              shrinkWrap: true,
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              itemCount: items.length,
+              itemBuilder: (_, index) {
+                final item = items[index];
+
+                return ListTile(
+                  onTap: () {
+                    Navigator.pop(context);
+                    onSelect(item);
+                  },
+                  contentPadding: const EdgeInsets.symmetric(vertical: 4),
+                  leading: Padding(
+                    padding: EdgeInsets.only(right: size.width * 0.02),
+                    child: Image.asset(item.iconPath!, scale: 2.8),
+                  ),
+                  title: Text(
+                    item.id,
+                    style: const TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  subtitle: Text('${item.name} (${item.symbol})'),
+                  trailing: Radio(
+                    value: item.id,
+                    groupValue: selected?.id,
+                    onChanged: (v) {},
+                  ),
+                );
+              },
+            ),
+          ),
+          const SizedBox(height: 16),
+        ],
+      ),
+    );
+  }
+}
