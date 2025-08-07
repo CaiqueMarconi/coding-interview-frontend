@@ -9,9 +9,7 @@ class ExchangeBackground extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        // Fundo azul claro
         Container(color: ThemeManager.secondaryColor),
-        // Curva amarela à direita
         Positioned.fill(
           child: Align(
             alignment: Alignment.centerRight,
@@ -24,7 +22,7 @@ class ExchangeBackground extends StatelessWidget {
             ),
           ),
         ),
-        // Conteúdo por cima
+
         child,
       ],
     );
@@ -36,18 +34,15 @@ class RightCurveClipper extends CustomClipper<Path> {
   Path getClip(Size size) {
     final path = Path();
 
-    // Começa no topo direito
     path.moveTo(size.width * 0.76, 0);
 
-    // Curva descendo para esquerda e voltando para direita
     path.quadraticBezierTo(
       size.width * 0.01,
-      size.height * 0.5, // ponto de controle (curva entra)
+      size.height * 0.5,
       size.width,
-      size.height * 0.8, // termina no canto inferior direito
+      size.height * 0.8,
     );
 
-    // Fecha o restante do retângulo
     path.lineTo(size.width, size.height);
     path.lineTo(size.width, 0);
     path.close();

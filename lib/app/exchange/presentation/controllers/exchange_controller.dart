@@ -72,7 +72,7 @@ class ExchangeController {
   }
 
   bool _hasError() {
-    if (exchangeStore.error != null) {
+    if (exchangeStore.hasError) {
       showSnackBarCustom(exchangeStore.error.message, color: ThemeManager.red);
       return true;
     } else {

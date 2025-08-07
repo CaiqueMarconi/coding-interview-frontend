@@ -1,42 +1,55 @@
-# Bienvenido al coding-interview-frontend
+# Currency Exchange Challenge 💱
 
-## Descripción
-Acá tienes todos los assets que necesitas para llevar a cabo una pequeña prueba técnica. El objetivo es que puedas demostrar tus habilidades de programación y de UI. El proyecto consiste de una pequeña calculadora que te muestra cuanto vas a recibir si quieres cambiar una determinada cantidad de una moneda a otra.
+This project was developed as part of the **El dorado** technical challenge. The goal is to build a small currency exchange calculator that shows how much a user will receive when converting a certain amount from one currency to another (FIAT ⇄ CRYPTO).
 
-## Características
-1. Hay dos tipos de monedas: "FIAT" y "CRYPTO".
-2. La tasa de cambio la podrás obtener de nuestro API público.
-3. La moneda del input 
+## 📱 Preview
 
-## API
-- URL: https://74j6q7lg6a.execute-api.eu-west-1.amazonaws.com/stage/orderbook/public/recommendations
-- Query Params:
-  - `type`: 0 -> Cambio de CRYPTO a FIAT, 1 -> Cambio de FIAT a CRYPTO
-  - `cryptoCurrencyId`: La moneda crypto (el ID está en el nombre del asset)
-  - `fiatCurrencyId`: La moneda fiat (el ID está en el nombre del asset)
-  - `amount`: Cantidad a cambiar
-  - `amountCurrencyId`: La moneda en la que está del input
+![Screenshot 1](./assets/pic_1.jpeg)
+![Screenshot 2](./assets/pic_2.jpeg)
+![Screenshot 3](./assets/pic_3.jpeg)
+![Screenshot 3](./assets/pic_4.jpeg)
+![Preview GIF](./assets/video.gif)
 
-Del response, simplemente obtener el `data.byPrice.fiatToCryptoExchangeRate` y multiplicarlo/dividirlo para mostrar toda la data necesaria.
+---
 
-### Que puedes hacer: 
-- ✅ Preferiblemente, usa Flutter :)
-- ✅ Cuantas mejoras de UX como veas necesarias/quieras
-- ✅ No todo tiene que estar funcionando a la perfección, lo que más vamos a tomar en cuenta es el parecido con el diseño y la calidad del código.
-- ✅ Desarrolla la app con la arquitecura de una app que va a escalar, no hagas un código que no puedas mantener en el futuro.
+## 🚀 Features
+
+- Input a value in any supported FIAT or CRYPTO currency
+- Automatically fetch exchange rates from public API
+- Display:
+  - Estimated rate
+  - Total received
+  - Estimated time to process
+- Switch between different currencies
+- Reactive UI with real-time updates
+- Internationalization (i18n): English, Spanish and Portuguese
+- Light and Dark theme ready (WIP)
+- Unit tested core logic
+
+---
+
+## 🛠️ Tech Stack
+
+| Category                  | Technology        |
+|--------------------------|-------------------|
+| 🧠 Architecture           | Clean Dart        |
+| 📦 State Management       | Triple            |
+| 💉 Dependency Injection   | Modular           |
+| 🌍 Routing                | Modular           |
+| 🌐 HTTP Client            | Dio               |
+| 🌎 Internationalization   | Flutter Intl (l10n) |
+| ✅ Testing                | Unit Tests        |
+
+---
+
+## 🧪 Testing
+
+Unit tests have been implemented for core business logic and use cases. The architecture ensures that each layer can be tested in isolation.
 
 
-### Que **no** puedes hacer:
-- ❌ Estresarte 🤗
+## 🎯 Possible Improvements
 
-
-## Pasos para comenzar
-1. Haz un fork usando este repositorio como template
-2. Clona el repositorio en tu máquina
-3. Desarrolla la mini-app
-4. Sube tus cambios a tu repositorio
-5. Avísanos que has terminado
-6. ???
-7. PROFIT
-
-### Cualquier duda contactarme a https://www.linkedin.com/in/carlosfontest/
+ - Improve test coverage to 100% on store
+ - Refactor some components for better scalability and code readability
+ - Add full support for Dark and Light theme switching
+ - Cache exchange rates to reduce API usage

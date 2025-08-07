@@ -1,4 +1,5 @@
 import 'package:coding_interview_frontend/app/exchange/domain/entities/currency_entity.dart';
+import 'package:coding_interview_frontend/app/exchange/domain/helpers/type_currency_enum.dart';
 import 'package:flutter/material.dart';
 
 class CurrencyBottomSheet extends StatelessWidget {
@@ -40,7 +41,9 @@ class CurrencyBottomSheet extends StatelessWidget {
             ),
           ),
           Text(
-            isFrom ? 'CRYPTO' : 'FIAT',
+            selected!.typeCurrency == TypeCurrencyEnum.crypto
+                ? 'CRYPTO'
+                : 'FIAT',
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
           ),
           const SizedBox(height: 12),
