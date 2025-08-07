@@ -7,19 +7,20 @@ import 'package:coding_interview_frontend/app/exchange/domain/usecases/get_excha
 import 'package:fpdart/fpdart.dart';
 
 class GetExchangeRateUsecase implements IGetExchangeRateUsecase {
-  final IGetExchangeRateRepository _repository;
+  final IGetExchangeRateRepository repository;
 
-  const GetExchangeRateUsecase(this._repository);
+  const GetExchangeRateUsecase(this.repository);
+
   @override
   Future<Either<IAppFailure, ExchangeResponse>> call(
     GetExchangeRateParams params,
   ) async {
-    final result = await _repository.getExchangeRate(params);
+    final result = await repository.getExchangeRate(params);
     final fold = result.fold((l) => l, (r) => r);
 
     if (fold is IAppFailure) return Left(fold);
-    final data = fold as ExchangeRateEntity;
 
+    final data = fold as ExchangeRateEntity;
     final rate = double.parse(data.rate);
 
     final value =
@@ -27,8 +28,8 @@ class GetExchangeRateUsecase implements IGetExchangeRateUsecase {
 
     return Right(
       ExchangeResponse(
-        estimatedRate: value.toStringAsFixed(2),
-        receive: rate.toStringAsFixed(2),
+        estimatedRate: rate.toStringAsFixed(2),
+        receive: value.toStringAsFixed(2),
         estimatedTime: data.releaseTime.round(),
       ),
     );

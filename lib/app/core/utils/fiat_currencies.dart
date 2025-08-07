@@ -5,26 +5,26 @@ class FiatCurrencies {
   static final List<FiatCurrencyEntity> fiatList = [
     FiatCurrencyEntity(
       id: 'BRL',
-      name: 'Real Brasileiro',
-      symbol: 'BRL',
+      name: 'Real Brasileño',
+      symbol: 'R\$',
       iconPath: ImageManager.brl,
     ),
     FiatCurrencyEntity(
       id: 'COP',
-      name: 'Peso Colombiano',
-      symbol: 'COP',
+      name: 'Peso Colombianos',
+      symbol: 'COL\$',
       iconPath: ImageManager.cop,
     ),
     FiatCurrencyEntity(
       id: 'PEN',
-      name: 'Sol Peruano',
-      symbol: 'PEN',
+      name: 'Soles Peruanos',
+      symbol: 'S/',
       iconPath: ImageManager.pen,
     ),
     FiatCurrencyEntity(
       id: 'VES',
-      name: 'Bolívar Venezuelano',
-      symbol: 'VES',
+      name: 'Bolívares',
+      symbol: 'Bs',
       iconPath: ImageManager.ves,
     ),
   ];

@@ -9,6 +9,7 @@ class AppWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp.router(
       title: 'Challenge El Dorado',
+      debugShowCheckedModeBanner: false,
       theme: ThemeManager.whichTheme(context),
       routerDelegate: Modular.routerDelegate,
       routeInformationParser: Modular.routeInformationParser,
