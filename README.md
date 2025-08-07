@@ -4,11 +4,13 @@ This project was developed as part of the **El dorado** technical challenge. The
 
 ## 📱 Preview
 
-<img src="./assets/pic_1.jpeg" alt="Screenshot 1" width="300"/>
-<img src="./assets/pic_2.jpeg" alt="Screenshot 2" width="300"/>
-<img src="./assets/pic_3.jpeg" alt="Screenshot 3" width="300"/>
-<img src="./assets/pic_4.jpeg" alt="Screenshot 4" width="300"/>
 ![Preview GIF](./assets/video.gif)
+
+<img src="./assets/pic_1.jpeg" alt="Screenshot 1" width="200"/>
+<img src="./assets/pic_2.jpeg" alt="Screenshot 2" width="200"/>
+<img src="./assets/pic_3.jpeg" alt="Screenshot 3" width="200"/>
+<img src="./assets/pic_4.jpeg" alt="Screenshot 4" width="200"/>
+
 
 ---
 
