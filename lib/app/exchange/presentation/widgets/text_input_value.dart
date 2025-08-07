@@ -2,7 +2,6 @@ import 'package:coding_interview_frontend/app/core/theme/theme_manager/theme_man
 import 'package:coding_interview_frontend/app/core/utils/currency_input_formatter.dart';
 import 'package:coding_interview_frontend/app/exchange/presentation/controllers/exchange_controller.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 class TextInputValue extends StatelessWidget {
   final String currencyId;

@@ -2,7 +2,7 @@ import 'package:coding_interview_frontend/app/core/theme/theme_manager/theme_man
 import 'package:coding_interview_frontend/app/exchange/presentation/controllers/exchange_controller.dart';
 import 'package:coding_interview_frontend/app/exchange/presentation/widgets/currency_exchange_selector.dart';
 import 'package:coding_interview_frontend/app/exchange/presentation/widgets/exchange_background.dart';
-import 'package:coding_interview_frontend/app/exchange/presentation/widgets/exchange_rate_row.dart';
+import 'package:coding_interview_frontend/app/exchange/presentation/widgets/exchange_rate_info.dart';
 import 'package:coding_interview_frontend/app/exchange/presentation/widgets/text_input_value.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_triple/flutter_triple.dart';
@@ -70,29 +70,8 @@ class _ExchangeScreenState extends State<ExchangeScreen> {
                   ),
 
                   SizedBox(height: size.height * 0.02),
-                  ScopedBuilder(
-                    store: widget.exchangeController.exchangeStore,
-                    onState: (context, state) {
-                      return Column(
-                        children: [
-                          ExchangeRateRow(
-                            text: t.label_estimated_rate,
-                            rate:
-                                '${widget.exchangeController.exchangeResponse.estimatedRate} ${widget.exchangeController.toCurrency.symbol}',
-                          ),
-                          ExchangeRateRow(
-                            text: t.label_you_will_receive,
-                            rate:
-                                '${widget.exchangeController.exchangeResponse.receive} ${widget.exchangeController.toCurrency.symbol}',
-                          ),
-                          ExchangeRateRow(
-                            text: t.label_estimated_time,
-                            rate:
-                                '${widget.exchangeController.exchangeResponse.estimatedTime} min',
-                          ),
-                        ],
-                      );
-                    },
+                  ExchangeRateInfo(
+                    exchangeController: widget.exchangeController,
                   ),
                   SizedBox(height: size.height * 0.02),
                   SizedBox(
