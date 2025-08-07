@@ -1,0 +1,14 @@
+{
+  "@@locale": "pt",
+  "currency_brl": "Real Brasileiro",
+  "currency_cop": "Peso Colombiano",
+  "currency_pen": "Soles Peruanos",
+  "currency_ves": "Bolívares",
+
+  "label_tengo": "Tenho",
+  "label_quiero": "Quero",
+  "label_estimated_rate": "Taxa estimada",
+  "label_you_will_receive": "Você receberá",
+  "label_estimated_time": "Tempo estimado",
+  "exchange": "Trocar"
+}

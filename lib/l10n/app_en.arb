@@ -1,0 +1,14 @@
+{
+  "@@locale": "en",
+  "currency_brl": "Brazilian Real",
+  "currency_cop": "Colombian Peso",
+  "currency_pen": "Peruvian Sol",
+  "currency_ves": "Bolívar",
+
+  "label_tengo": "have",
+  "label_quiero": "want",
+  "label_estimated_rate": "Estimated rate",
+  "label_you_will_receive": "You will receive",
+  "label_estimated_time": "Estimated time",
+  "exchange": "Exchange"
+}

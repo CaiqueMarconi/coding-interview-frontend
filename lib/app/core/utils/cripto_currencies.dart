@@ -5,6 +5,7 @@ class CryptoCurrencies {
   static final List<CryptoCurrencyEntity> cryptoList = [
     CryptoCurrencyEntity(
       id: 'TATUM-TRON-USDT',
+      title: 'USDT',
       name: 'Tether',
       symbol: 'USDT',
       iconPath: ImageManager.tatumUSDT,

@@ -1,11 +1,13 @@
 abstract class CurrencyEntity {
   final String id;
+  final String title;
   final String name;
   final String symbol;
   final String? iconPath;
 
   CurrencyEntity({
     required this.id,
+    required this.title,
     required this.name,
     required this.symbol,
     this.iconPath,
@@ -15,6 +17,7 @@ abstract class CurrencyEntity {
 class CryptoCurrencyEntity extends CurrencyEntity {
   CryptoCurrencyEntity({
     required super.id,
+    required super.title,
     required super.name,
     required super.symbol,
     super.iconPath,
@@ -24,6 +27,7 @@ class CryptoCurrencyEntity extends CurrencyEntity {
 class FiatCurrencyEntity extends CurrencyEntity {
   FiatCurrencyEntity({
     required super.id,
+    required super.title,
     required super.name,
     required super.symbol,
     super.iconPath,

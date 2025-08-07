@@ -6,6 +6,7 @@ import 'package:coding_interview_frontend/app/exchange/presentation/widgets/exch
 import 'package:coding_interview_frontend/app/exchange/presentation/widgets/text_input_value.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_triple/flutter_triple.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ExchangeScreen extends StatefulWidget {
   final ExchangeController exchangeController;
@@ -21,6 +22,7 @@ class _ExchangeScreenState extends State<ExchangeScreen> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+    final t = AppLocalizations.of(context)!;
     return Scaffold(
       body: ExchangeBackground(
         child: Column(
@@ -42,22 +44,31 @@ class _ExchangeScreenState extends State<ExchangeScreen> {
                     exchangeController: widget.exchangeController,
                   ),
                   SizedBox(height: size.height * 0.014),
-                  Container(
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        color: ThemeManager.primaryColor,
-                        width: 1.5,
-                      ),
-                      borderRadius: BorderRadius.circular(size.width * 0.04),
-                      color: ThemeManager.white,
-                    ),
-                    padding: const EdgeInsets.symmetric(horizontal: 12),
-                    child: TextInputValue(
-                      formKey: _formKey,
-                      currencyId: 'USDT',
-                      exchangeController: widget.exchangeController,
-                    ),
+                  ScopedBuilder(
+                    store: widget.exchangeController.exchangeStore,
+                    onState:
+                        (context, state) => Container(
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              color: ThemeManager.primaryColor,
+                              width: 1.5,
+                            ),
+                            borderRadius: BorderRadius.circular(
+                              size.width * 0.04,
+                            ),
+                            color: ThemeManager.white,
+                          ),
+                          padding: const EdgeInsets.symmetric(horizontal: 12),
+
+                          child: TextInputValue(
+                            formKey: _formKey,
+                            currencyId:
+                                widget.exchangeController.fromCurrency.title,
+                            exchangeController: widget.exchangeController,
+                          ),
+                        ),
                   ),
+
                   SizedBox(height: size.height * 0.02),
                   ScopedBuilder(
                     store: widget.exchangeController.exchangeStore,
@@ -65,17 +76,17 @@ class _ExchangeScreenState extends State<ExchangeScreen> {
                       return Column(
                         children: [
                           ExchangeRateRow(
-                            text: 'Tasa estimada',
+                            text: t.label_estimated_rate,
                             rate:
                                 '${widget.exchangeController.exchangeResponse.estimatedRate} ${widget.exchangeController.toCurrency.symbol}',
                           ),
                           ExchangeRateRow(
-                            text: 'Recibirás',
+                            text: t.label_you_will_receive,
                             rate:
                                 '${widget.exchangeController.exchangeResponse.receive} ${widget.exchangeController.toCurrency.symbol}',
                           ),
                           ExchangeRateRow(
-                            text: 'Tiempo estimado',
+                            text: t.label_estimated_time,
                             rate:
                                 '${widget.exchangeController.exchangeResponse.estimatedTime} min',
                           ),
@@ -103,8 +114,8 @@ class _ExchangeScreenState extends State<ExchangeScreen> {
                         _formKey.currentState?.save();
                         await widget.exchangeController.getExchangeRate();
                       },
-                      child: const Text(
-                        'Cambiar',
+                      child: Text(
+                        t.exchange,
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 16,

@@ -3,8 +3,9 @@ import 'package:coding_interview_frontend/app/exchange/domain/entities/exchange_
 class ExchangeRateMapper {
   static ExchangeRateEntity fromMap(Map<String, dynamic> map) {
     return ExchangeRateEntity(
-      rate: map['data']['byPrice']['fiatToCryptoExchangeRate'],
-      releaseTime: map['data']['byPrice']['offerMakerStats']['releaseTime'],
+      rate: map['data']?['byPrice']?['fiatToCryptoExchangeRate'] ?? '0.0',
+      releaseTime:
+          map['data']?['byPrice']?['offerMakerStats']?['releaseTime'] ?? 0,
     );
   }
 }

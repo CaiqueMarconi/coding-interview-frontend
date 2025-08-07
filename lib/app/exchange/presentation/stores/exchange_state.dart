@@ -1,4 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:coding_interview_frontend/app/core/utils/cripto_currencies.dart';
 import 'package:coding_interview_frontend/app/core/utils/fiat_currencies.dart';
 import 'package:coding_interview_frontend/app/exchange/domain/entities/currency_entity.dart';

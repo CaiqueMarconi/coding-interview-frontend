@@ -4,6 +4,7 @@ import 'package:coding_interview_frontend/app/exchange/presentation/widgets/curr
 import 'package:flutter/material.dart';
 import 'package:flutter_triple/flutter_triple.dart';
 import 'package:lottie/lottie.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CurrencyExchangeSelector extends StatefulWidget {
   final ExchangeController exchangeController;
@@ -46,7 +47,7 @@ class _CurrencyExchangeSelectorState extends State<CurrencyExchangeSelector>
       builder:
           (_) => CurrencyBottomSheet(
             selected: widget.exchangeController.selectedCurrency,
-            items: widget.exchangeController.getListCurrencies(),
+            items: widget.exchangeController.getListCurrencies(context),
             isFrom: isFrom,
             onSelect:
                 (v) =>
@@ -58,6 +59,7 @@ class _CurrencyExchangeSelectorState extends State<CurrencyExchangeSelector>
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+    final t = AppLocalizations.of(context)!;
     return ScopedBuilder(
       store: widget.exchangeController.exchangeStore,
       onState: (context, state) {
@@ -102,7 +104,7 @@ class _CurrencyExchangeSelectorState extends State<CurrencyExchangeSelector>
                             ),
                             const SizedBox(width: 6),
                             Text(
-                              widget.exchangeController.fromCurrency.symbol,
+                              widget.exchangeController.fromCurrency.title,
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 color: ThemeManager.greyText,
@@ -149,7 +151,7 @@ class _CurrencyExchangeSelectorState extends State<CurrencyExchangeSelector>
                             ),
                             const SizedBox(width: 6),
                             Text(
-                              widget.exchangeController.toCurrency.symbol,
+                              widget.exchangeController.toCurrency.title,
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 color: ThemeManager.greyText,
@@ -183,7 +185,7 @@ class _CurrencyExchangeSelectorState extends State<CurrencyExchangeSelector>
                           horizontal: size.width * 0.01,
                         ),
                         child: Text(
-                          'TENGO',
+                          t.label_tengo.toUpperCase(),
                           style: TextStyle(
                             fontSize: size.width * 0.0263,
                             color: ThemeManager.greyText,
@@ -197,7 +199,7 @@ class _CurrencyExchangeSelectorState extends State<CurrencyExchangeSelector>
                           horizontal: size.width * 0.01,
                         ),
                         child: Text(
-                          'QUIERO',
+                          t.label_quiero.toUpperCase(),
                           style: TextStyle(
                             fontSize: size.width * 0.0263,
                             color: ThemeManager.greyText,
