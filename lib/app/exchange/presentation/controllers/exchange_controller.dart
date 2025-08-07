@@ -23,6 +23,7 @@ class ExchangeController {
   ExchangeResponse get exchangeResponse => exchangeStore.state.exchangeResponse;
   int get type => exchangeStore.state.getExchangeRateParams.resolveType();
   CurrencyEntity get selectedCurrency => exchangeStore.state.selectedCurrency;
+  bool get isLoading => exchangeStore.isLoading;
 
   Future<void> getExchangeRate() async {
     await exchangeStore.getExchangeRate();

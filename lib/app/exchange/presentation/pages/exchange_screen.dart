@@ -74,34 +74,48 @@ class _ExchangeScreenState extends State<ExchangeScreen> {
                     exchangeController: widget.exchangeController,
                   ),
                   SizedBox(height: size.height * 0.02),
-                  SizedBox(
-                    width: size.width,
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: ThemeManager.primaryColor,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(
-                            size.width * 0.04,
+                  ScopedBuilder(
+                    store: widget.exchangeController.exchangeStore,
+                    onState:
+                        (context, state) => SizedBox(
+                          width: size.width,
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: ThemeManager.primaryColor,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(
+                                  size.width * 0.04,
+                                ),
+                              ),
+                              padding: EdgeInsets.symmetric(
+                                horizontal: size.width * 0.04,
+                                vertical: size.height * 0.014,
+                              ),
+                            ),
+                            onPressed: () async {
+                              _formKey.currentState?.save();
+                              await widget.exchangeController.getExchangeRate();
+                            },
+                            child:
+                                widget.exchangeController.isLoading
+                                    ? SizedBox(
+                                      width: 24,
+                                      height: 24,
+                                      child: CircularProgressIndicator(
+                                        strokeWidth: 1.8,
+                                        color: ThemeManager.white,
+                                      ),
+                                    )
+                                    : Text(
+                                      t.exchange,
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
                           ),
                         ),
-                        padding: EdgeInsets.symmetric(
-                          horizontal: size.width * 0.04,
-                          vertical: size.height * 0.014,
-                        ),
-                      ),
-                      onPressed: () async {
-                        _formKey.currentState?.save();
-                        await widget.exchangeController.getExchangeRate();
-                      },
-                      child: Text(
-                        t.exchange,
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                    ),
                   ),
                 ],
               ),
